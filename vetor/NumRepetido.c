@@ -28,14 +28,12 @@
         compara[tam2] = lista[i];
         cont=0;
         for(int a=0; a<tam; a++){
-            if(lista[a] == compara[tam2]){
-            cont++;
+            if(lista[a] == compara[tam2])cont++;
                 if(cont>repeticao){
                     contador[i]=lista[a];
                     tam3 = i;
                     repeticao = cont;
                 }
-            }
         }
         tam2++;
     }
