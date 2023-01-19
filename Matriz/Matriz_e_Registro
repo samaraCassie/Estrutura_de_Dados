@@ -1,0 +1,59 @@
+#include <stdio.h>
+#include <stdlib.h>
+#define maxlin 3
+#define maxcol 4
+
+typedef struct{
+    int matricula;
+    float altura;
+    char sexo;
+    char nome[50];
+} Aluno;
+
+void dadosAluno(Aluno a){
+    printf("Nome......: %s\n", a.nome);
+    printf("matricula.: %d\n", a.matricula);
+    printf("altura....: %.1f\n", a.altura);
+    printf("sexo......: %c\n", a.sexo);
+    printf("\n\n")
+
+}
+
+int main()
+{
+    Aluno samara;
+    samara.matricula = 20211570;
+    samara.altura = 1.7;
+    samara.sexo = 'F';
+    strcpy(samara.nome, "Samara Cassie");
+
+    dadosAluno(samara);
+    
+    //---------------------------
+    
+    int qnt;
+    Aluno vetor[10];
+
+    printf("Quantos alunos voce quer inserir?");
+    scanf(" %d", &qnt);
+
+    for(int i=0; i<qnt; i++){
+        fflush(stdin);
+        printf("Nome: ");
+        gets(vetor[i].nome);
+
+        printf("Matricula: ");
+        scanf(" %d", &vetor[i].matricula);
+
+        printf("Altura: ");
+        scanf(" %f", &vetor[i].altura);
+
+        fflush(stdin);
+        printf("Sexo: ");
+        scanf(" %c", &vetor[i].sexo);
+        printf("\n-------------------------\n\n")
+    }
+    for(int i=0; i<qnt; i++){
+        dadosAluno(vetor[i]);
+    }
+}
