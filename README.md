@@ -1,4 +1,4 @@
-/* # Estrutura de Dados com C++ 
+# Estrutura de Dados com C++ 
 - Vetor
 - Pilha Estática
 - Fila Estática
