@@ -14,3 +14,7 @@ using namespace std;
         max_posicoes = tam_vetor;
         estrutura = new Aluno[tam_vetor];
     }
+     Hash::~Hash()
+    {
+        delete [] estrutura;
+    }
