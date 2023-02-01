@@ -22,3 +22,7 @@ using namespace std;
     {
         return (quant_itens == max_itens);
     }    
+     int Hash::obterTamanhoAtual()
+    {
+        return (quant_itens);
+    }
