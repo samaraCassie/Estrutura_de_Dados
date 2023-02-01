@@ -18,3 +18,7 @@ using namespace std;
     {
         delete [] estrutura;
     }
+    bool Hash::estacheio()
+    {
+        return (quant_itens == max_itens);
+    }    
