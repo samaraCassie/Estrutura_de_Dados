@@ -16,3 +16,8 @@
     {
         return ra;
     }
+
+     string Aluno::obterNome()
+    {
+        return nome;
+    }
