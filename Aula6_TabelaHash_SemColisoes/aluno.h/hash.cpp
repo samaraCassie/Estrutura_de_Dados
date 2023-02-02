@@ -32,11 +32,22 @@ using namespace std;
         estrutura[local] = aluno;
         quant_itens++;
     }
-     void Hash::deletar(Aluno aluno)
+    void Hash::deletar(Aluno aluno)
     {
         int local = FuncaoHash(aluno);
         if (estrutura[local].obterRa() != -1){
             estrutura[local] = Aluno(-1, " ");
             quant_itens--;
+        }
+    }
+    void Hash::buscar(Aluno& aluno, bool& busca)
+    {
+        int local = FuncaoHash(aluno);
+        Aluno aux = estrutura[local];
+        if (aluno.obterRa() != aux.obterRa()){
+            busca = false;
+        } else{
+            busca = true;
+            aluno = aux;
         }
     }
