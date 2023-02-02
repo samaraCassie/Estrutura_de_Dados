@@ -51,3 +51,14 @@ using namespace std;
             aluno = aux;
         }
     }
+    
+    void Hash::imprimir()
+    {
+        cout << "Tabela Hash:\n";
+        for (int i=0 ; i<max_posicoes ; i++){
+            if (estrutura[i].obterRa() != -1){
+                cout << i << ":" << estrutura[i].obterRa() << " "; 
+                cout << estrutura[i].obterNome() << endl;
+            }
+        }
+    }
