@@ -14,7 +14,7 @@ using namespace std;
         max_posicoes = tam_vetor;
         estrutura = new Aluno[tam_vetor];
     }
-     Hash::~Hash()
+    Hash::~Hash()
     {
         delete [] estrutura;
     }
@@ -22,7 +22,13 @@ using namespace std;
     {
         return (quant_itens == max_itens);
     }    
-     int Hash::obterTamanhoAtual()
+    int Hash::obterTamanhoAtual()
     {
         return (quant_itens);
+    }
+    void Hash::inserir(Aluno aluno)
+    {
+        int local = FuncaoHash(aluno);
+        estrutura[local] = aluno;
+        quant_itens++;
     }
