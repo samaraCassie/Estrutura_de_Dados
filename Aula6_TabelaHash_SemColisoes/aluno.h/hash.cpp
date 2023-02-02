@@ -32,3 +32,11 @@ using namespace std;
         estrutura[local] = aluno;
         quant_itens++;
     }
+     void Hash::deletar(Aluno aluno)
+    {
+        int local = FuncaoHash(aluno);
+        if (estrutura[local].obterRa() != -1){
+            estrutura[local] = Aluno(-1, " ");
+            quant_itens--;
+        }
+    }
