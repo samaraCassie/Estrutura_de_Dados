@@ -4,8 +4,7 @@ using namespace std;
  
 typedef int TipoItem;// se mudo aq o tipo do dado mudará no prog td
 
-struct No
-{
+struct No{
     TipoItem prato;
     No* proximo;
 };
