@@ -7,7 +7,7 @@ int main()
 {
     pilhaDinamica pilha1; // Chama classe(pilha) e cria objeto(pilha1)
     TipoItem prato;
-    int opcao, tamanho; 
+    int opcao, tamanho=0; 
 
     cout << "<----------Vamos Lavar os Pratos---------->\n\n";
 
@@ -16,7 +16,7 @@ int main()
         cout << "\n[0] Abandonar a pia\n";
         cout << "[1] Colocar prato sujo para lavar\n";
         cout << "[2] Lavar prato\n";
-        cout << "[3] Ver quais são os pratos sujos\n"; // Tentar criar uma pilha para os pratos limpos
+        cout << "[3] Ver quais sao os pratos sujos\n"; // Tentar criar uma pilha para os pratos limpos
         cin >> opcao;
 
         if(opcao == 1)
@@ -24,15 +24,17 @@ int main()
             cout << "\nQue prato eh esse?\n";
             cin >> prato;
             pilha1.inserir(prato);
+            tamanho++;
         } else if (opcao == 2)
         {
             prato = pilha1.remover();
             if (prato != 0)
             {
                 cout << "\nPrato lavado: " << prato << endl;
+                tamanho--;
             }else
             {
-                cout << " ";
+                cout << "Erro";
             }
         } else if (opcao == 3)
         {
