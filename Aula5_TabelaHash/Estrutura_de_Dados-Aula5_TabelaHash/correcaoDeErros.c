@@ -3,7 +3,7 @@
 #include <string.h>
 
 // ERRO A corrigir: Limitar quantia de agarismos do Id (8 algarismos)
-
+/*
 int AnaliseDado (int x)
 {
     int chk;
@@ -25,4 +25,4 @@ int AnaliseDado (int x)
         }
     }
     return x;
-}
+} */

@@ -25,12 +25,14 @@ int main()
         cout << "[2] Remover aluno\n";
         cout << "[3] Ver lista de cadastros\n";
         cout << "[4] Buscar\n";
-        opcao=AnaliseDado(opcao);
+        cin >> opcao;
+        //opcao=AnaliseDado(opcao);
 
         if (opcao == 1)
         {
             cout << "Id do aluno: ";
-            id=AnaliseDado(id);
+            cin >> id;
+            //id=AnaliseDado(id);
             cout << "\nNome do aluno: ";
             cin >> nome;
             Aluno aluno(id, nome);
@@ -38,7 +40,8 @@ int main()
         } else if (opcao == 2)
         {
             cout << "Id do aluno: ";
-            id=AnaliseDado(id);
+            cin >> id;
+            //id=AnaliseDado(id);
             Aluno aluno(id, " ");
             //cout << "Certeza que deseja remover esse cadastro?"
             alunoHash.remover(aluno);
@@ -50,7 +53,8 @@ int main()
         } else if (opcao == 4)
         {
             cout << "Id do aluno: ";
-            id=AnaliseDado(id);
+            cin >> id;
+            //id=AnaliseDado(id);
             Aluno aluno(id, " ");
             alunoHash.busca(aluno, busca);
         } //else if (opcao)
