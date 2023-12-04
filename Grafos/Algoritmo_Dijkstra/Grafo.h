@@ -1,32 +1,28 @@
-#ifndef GRAFO_H
-#define GRAFO_H
+// Grafo Simples Não-Direcionado ponderado
+#include <iostream>
 
-#include <vector>
-#include <set>
+using namespace std;
 
-struct No {
-    int vertice;
-    int peso;
+typedef string TipoItem;
 
-    No(int v, int w);
+class Grafo{
+    private:
+    int arestanula;
+    int maxvertices;
+    int numvertices;
+    TipoItem* vertices;
+    int** matrizadjacencias;
+
+    public:
+    Grafo(int max, int valorarestanula);
+    ~Grafo();
+    int obterindice(TipoItem item);
+    bool estacheio();
+    void inserevertice(TipoItem item);
+    void inserearesta(TipoItem Nosaida, TipoItem Noentrada, int peso);
+    int obterpeso(TipoItem Nosaida, TipoItem Noentrada);
+    int obtergrau(TipoItem item);
+    void imprimirmatriz();
+    void imprimirvertices();
+
 };
-
-class Grafo {
-public:
-    Grafo();
-    void adicionarNo(int vertice);
-    void adicionarAresta(int verticeOrigem, int verticeDestino, int peso);
-    void definirPontoInicio(int inicio);
-    void definirPontoDestino(int destino);
-    void imprimirGrafo();
-    void dijkstra();
-    int getMenorDistancia();
-
-private:
-    std::vector<std::set<No>> grafo;
-    std::vector<int> distancia;
-    int pontoInicio;
-    int pontoDestino;
-};
-
-#endif // GRAFO_H

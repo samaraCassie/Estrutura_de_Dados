@@ -1,77 +1,61 @@
-#include "Grafo.h"
 #include <iostream>
+#include "grafo.h"
 
-void mostrarMenu() {
-    std::cout << "\nMenu:\n";
-    std::cout << "1. Criar Grafo\n";
-    std::cout << "2. Buscar Menor Caminho\n";
-    std::cout << "3. Mostrar Grafo\n";
-    std::cout << "4. Sair\n";
-}
+using namespace std;
 
-int main() {
-    Grafo meuGrafo;
-    bool sair = false;
+int main(){
+    int max, valorarestanula;
+    cout << "Digite a quantidade maxima de vertices:\n";
+    cin >> max;
+    cout << "Digite o valor para representar a ausencia de aresta:\n";
+    cin >> valorarestanula;
+    Grafo grafo1(max, valorarestanula);
+    TipoItem item1, item2;
+    int opcao, valor, peso;
 
-    do {
-        mostrarMenu();
+    do{
+        cout << "\n\n-----------MENU-----------\n\n"
+        cout << "[0] parar o algoritmo!\n";
+        cout << "[1] inserir um vertice!\n";
+        cout << "[2] inserir uma aresta!\n";
+        cout << "[3] imprimir o grau de um vertice!\n";
+        cout << "[4] imprimir o peso de uma aresta!\n";
+        cout << "[5] imprimir a matriz de adjacencias!\n";
+        cout << "[6] imprimir a lista de vertices!\n";
+        cout << "--------------------------------\n\n"
+        cin >> opcao;
 
-        int opcao;
-        std::cout << "Escolha uma opção: ";
-        std::cin >> opcao;
-
-        switch (opcao) {
-            case 1: {
-                int numVertices;
-                std::cout << "Digite o número de vértices: ";
-                std::cin >> numVertices;
-
-                for (int i = 0; i < numVertices; ++i) {
-                    meuGrafo.adicionarNo(i);
-                }
-
-                std::cout << "Grafo criado com sucesso!\n";
-                break;
-            }
-
-            case 2: {
-                if (meuGrafo.getMenorDistancia() == -1) {
-                    std::cerr << "Erro: Grafo não criado ou pontos de início/destino não definidos.\n";
-                    break;
-                }
-
-                int inicio, destino;
-                std::cout << "Digite o ponto de início: ";
-                std::cin >> inicio;
-
-                std::cout << "Digite o ponto de destino: ";
-                std::cin >> destino;
-
-                meuGrafo.definirPontoInicio(inicio);
-                meuGrafo.definirPontoDestino(destino);
-                meuGrafo.dijkstra();
-
-                std::cout << "A menor distância do ponto " << inicio << " para o ponto " << destino << " é: " << meuGrafo.getMenorDistancia() << "\n";
-                break;
-            }
-
-            case 3: {
-                meuGrafo.imprimirGrafo();
-                break;
-            }
-
-            case 4:
-                sair = true;
-                break;
-
-            default:
-                std::cerr << "Opção inválida. Tente novamente.\n";
-                break;
+        if (opcao == 1){
+            cout << "Digite o elemento do vertice que sera inserido:\n";
+            cin >> item1;
+            grafo1.inserevertice(item1);
+        } else if (opcao == 2){
+            cout << "Digite o vertice de saida:\n";
+            cin >> item1;
+            cout << "Digite o vertice de entrada:\n";
+            cin >> item2;
+            cout << "Digite o peso desta aresta:\n";
+            cin >> peso;
+            grafo1.inserearesta(item1, item2, peso);
+        } else if (opcao == 3){
+            cout << "Digite o vertice que sera calculado o grau:\n";
+            cin >> item1;
+            valor = grafo1.obtergrau(item1);
+            cout << "O grau desse vertice e: " << valor << endl;
+        } else if (opcao == 4){
+            cout << "Digite o vertice de saida:\n";
+            cin >> item1;
+            cout << "Digite o vertice de entrada:\n";
+            cin >> item2;
+            valor = grafo1.obterpeso(item1, item2);
+            cout << "O peso dessa aresta e: " << valor << endl;
+        } else if (opcao == 5){
+            grafo1.imprimirmatriz();
+        } else if (opcao == 6){
+            grafo1.imprimirvertices();
         }
+    } while (opcao != 0);
 
-    } while (!sair);
 
     return 0;
-}
-
-//C:\MinGW\bin\g++.exe -Wall -Wextra -g3 c:\Users\sonia\Documents\GitHub\Estrutura_de_Dados\Grafos\Algoritmo_Dijkstra\Main.cpp c:\Users\sonia\Documents\GitHub\Estrutura_de_Dados\Grafos\Algoritmo_Dijkstra\Main.cpp c:\Users\sonia\Documents\GitHub\Estrutura_de_Dados\Grafos\Algoritmo_Dijkstra\Grafo.cpp -o c:\Users\sonia\Documents\GitHub\Estrutura_de_Dados\Grafos\Algoritmo_Dijkstra\Grafo.cpp -o c:\Users\sonia\Documents\GitHub\Estrutura_de_Dados\Grafos\Algoritmo_Dijkstra\output\Main.exec:\Users\sonia\Documents\GitHub\Estrutura_de_Dados\Grafos\Algoritmo_Dijkstra
+} 

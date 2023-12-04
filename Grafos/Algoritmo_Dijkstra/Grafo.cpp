@@ -1,68 +1,105 @@
-#include "Grafo.h"
 #include <iostream>
-#include <queue>
-#include <climits>
+#include "grafo.h"
 
-No::No(int v, int w) : vertice(v), peso(w) {}
+using namespace std;
 
-Grafo::Grafo() : pontoInicio(-1), pontoDestino(-1) {}
+    Grafo::Grafo(int max, int valorarestanula) //construtor
+    {
+        numvertices = 0;
+        maxvertices = max;
+        arestanula = valorarestanula;
 
-void Grafo::adicionarNo(int vertice) {
-    grafo.resize(vertice + 1);  // Garante que o vetor tenha espaço para o novo nó
-}
+        vertices = new TipoItem[maxvertices];
 
-void Grafo::adicionarAresta(int verticeOrigem, int verticeDestino, int peso) {
-    grafo[verticeOrigem].insert(No(verticeDestino, peso));
-}
+        matrizadjacencias = new int*[maxvertices];
+        for (int i=0 ; i<maxvertices ; i++){
+            matrizadjacencias[i] = new int[maxvertices];
+        }
 
-void Grafo::definirPontoInicio(int inicio) {
-    pontoInicio = inicio;
-}
-
-void Grafo::definirPontoDestino(int destino) {
-    pontoDestino = destino;
-}
-
-void Grafo::dijkstra() {
-    if (pontoInicio == -1 || pontoDestino == -1) {
-        std::cerr << "Erro: Pontos de início e destino não definidos.\n";
-        return;
-    }
-
-    int numVertices = grafo.size();
-    distancia.assign(numVertices, INT_MAX);
-    distancia[pontoInicio] = 0;
-
-    std::priority_queue<std::pair<int, int>, std::vector<std::pair<int, int>>, std::greater<std::pair<int, int>>> filaPrioridade;
-    filaPrioridade.push({0, pontoInicio});
-
-    while (!filaPrioridade.empty()) {
-        int u = filaPrioridade.top().second;
-        filaPrioridade.pop();
-
-        for (const No& vizinho : grafo[u]) {
-            int v = vizinho.vertice;
-            int peso = vizinho.peso;
-
-            if (distancia[v] > distancia[u] + peso) {
-                distancia[v] = distancia[u] + peso;
-                filaPrioridade.push({distancia[v], v});
+        for (int i=0 ; i<maxvertices ; i++){
+            for (int j=0 ; j<maxvertices ; j++){
+                matrizadjacencias[i][j] = arestanula;
             }
         }
     }
-}
 
-int Grafo::getMenorDistancia() {
-    return (pontoDestino != -1) ? distancia[pontoDestino] : -1;
-}
-
-void Grafo::imprimirGrafo() {
-    std::cout << "\nGrafo:\n";
-    for (int i = 0; i < grafo.size(); ++i) {
-        std::cout << "Vértice " << i << ": ";
-        for (const No& vizinho : grafo[i]) {
-            std::cout << "(" << vizinho.vertice << ", " << vizinho.peso << ") ";
+    Grafo::~Grafo() //destrutor
+    {
+        delete [] vertices;
+        for (int i=0 ; i<maxvertices ; i++){
+            delete [] matrizadjacencias[i];
         }
-        std::cout << "\n";
+        delete [] matrizadjacencias;
     }
-}
+
+    int Grafo::obterindice(TipoItem item)
+    {
+        int indice = 0;
+        while (item != vertices[indice]){
+            indice++;
+        }
+        return indice;
+    }
+
+    bool Grafo::estacheio()
+    {
+        return (numvertices == maxvertices);
+    }
+
+    void Grafo::inserevertice(TipoItem item)
+    {
+        if (estacheio()){
+            cout << "O numero maximo de vertices foi alcancado!\n";
+        } else{
+            vertices[numvertices] = item;
+            numvertices++;
+        }
+    }
+
+    void Grafo::inserearesta(TipoItem Nosaida, TipoItem Noentrada, int peso)
+    {
+        int linha = obterindice(Nosaida);
+        int coluna = obterindice(Noentrada);
+
+        matrizadjacencias[linha][coluna] = peso;
+
+        matrizadjacencias[coluna][linha] = peso; //Remover se for direcionado
+    }
+
+    int Grafo::obterpeso(TipoItem Nosaida, TipoItem Noentrada)
+    {
+        int linha = obterindice(Nosaida);
+        int coluna = obterindice(Noentrada);
+        return (matrizadjacencias[linha][coluna]);        
+    }
+
+    int Grafo::obtergrau(TipoItem item)
+    {
+        int linha = obterindice(item);
+        int grau = 0;
+        for (int i=0 ; i<maxvertices ; i++){
+            if (matrizadjacencias[linha][i] != arestanula){
+                grau++;
+            }
+        }
+        return grau;
+    }
+
+    void Grafo::imprimirmatriz()
+    {
+        cout << "Matriz de adjacencias:\n";
+        for (int i=0 ; i<maxvertices ; i++){
+            for (int j=0 ; j<maxvertices ; j++){
+                cout << matrizadjacencias[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
+
+    void Grafo::imprimirvertices()
+    {
+        cout << "Lista de Vertices:\n";
+        for (int i=0 ; i<numvertices ; i++){
+            cout << i << ": " << vertices[i] << endl;
+        }
+    }
